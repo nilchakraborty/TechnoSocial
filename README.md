@@ -1,6 +1,6 @@
 # TechnoSocial
 
-## This is a full-fledged MERN social media app that allows users to register, sign in, create posts, like and dislike posts, view comments, and add friends. The app is fully responsive and uses a variety of technologies, including MongoDB, Express.js, React, and Node.js.
+This is a full-fledged MERN social media app that allows users to register, sign in, create posts, like and dislike posts, view comments, and add friends. The app is fully responsive and uses a variety of technologies, including MongoDB, Express.js, React, and Node.js.
 
 ### Here are the instructions for running the app:
 
