@@ -1,6 +1,5 @@
 import {
   ManageAccountsOutlined,
-  EditOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined,
 } from "@mui/icons-material";
@@ -14,8 +13,8 @@ import Gallery from "../../picdump/8.png";
 import Videos from "../../picdump/9.png";
 import Messages from "../../picdump/10.png";
 import Tutorials from "../../picdump/11.png";
-import Courses from "../../picdump/12.png";
-import Fund from "../../picdump/13.png";
+// import Courses from "../../picdump/12.png";
+// import Fund from "../../picdump/13.png";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
@@ -106,38 +105,22 @@ const UserWidget = ({ userId, picturePath }) => {
 
       <Divider />
 
-      {/* FOURTH ROW */}
+      {/* THIRD ROW */}
       <Box p="1rem 0">
-        <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
-          Social Profiles
-        </Typography>
-
-        <FlexBetween gap="1rem" mb="0.5rem">
-          <FlexBetween gap="1rem">
-            <img src="../assets/twitter.png" alt="twitter" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                Twitter
-              </Typography>
-              <Typography color={medium}>Social Network</Typography>
-            </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+        <FlexBetween mb="0.5rem">
+          <Typography color={medium}>Who's viewed your profile</Typography>
+          <Typography color={main} fontWeight="500">
+            {viewedProfile}
+          </Typography>
         </FlexBetween>
-
-        <FlexBetween gap="1rem">
-          <FlexBetween gap="1rem">
-            <img src="../assets/linkedin.png" alt="linkedin" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                Linkedin
-              </Typography>
-              <Typography color={medium}>Network Platform</Typography>
-            </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+        <FlexBetween>
+          <Typography color={medium}>Impressions of your post</Typography>
+          <Typography color={main} fontWeight="500">
+            {impressions}
+          </Typography>
         </FlexBetween>
       </Box>
+
       <Divider />
 
       {/* Fifth Row */}

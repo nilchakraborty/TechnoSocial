@@ -1,10 +1,18 @@
 import {
+  Send,
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Divider,
+  IconButton,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -24,6 +32,7 @@ const PostWidget = ({
   comments,
 }) => {
   const [isComments, setIsComments] = useState(false);
+  const [newComment, setNewComment] = useState("");
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
@@ -45,6 +54,27 @@ const PostWidget = ({
     });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
+  };
+
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  const handleAddComment = async () => {
+    const response = await fetch(
+      `http://localhost:3001/posts/${postId}/comment`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: loggedInUserId, comment: newComment }),
+      }
+    );
+    const updatedPost = await response.json();
+    dispatch(setPost({ post: updatedPost }));
+    setNewComment("");
   };
 
   return (
@@ -81,7 +111,9 @@ const PostWidget = ({
           </FlexBetween>
 
           <FlexBetween gap="0.3rem">
-            <IconButton onClick={() => setIsComments(!isComments)}>
+            <IconButton
+              onClick={() => setIsComments((prevIsComments) => !prevIsComments)}
+            >
               <ChatBubbleOutlineOutlined />
             </IconButton>
             <Typography>{comments.length}</Typography>
@@ -103,6 +135,25 @@ const PostWidget = ({
             </Box>
           ))}
           <Divider />
+          {/* Comment Box */}
+          <Box display="flex" mt="0.5rem">
+            <TextField
+              label="Add a comment"
+              variant="outlined"
+              size="small"
+              value={newComment}
+              onChange={handleCommentChange}
+              fullWidth
+            />
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={handleAddComment}
+              disabled={!newComment}
+            >
+              <Send />
+            </IconButton>
+          </Box>
         </Box>
       )}
     </WidgetWrapper>

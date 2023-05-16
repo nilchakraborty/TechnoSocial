@@ -20,6 +20,7 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
+import Tooltip from "@mui/material/Tooltip";
 import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
@@ -80,16 +81,24 @@ const Navbar = () => {
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode === "dark" ? (
-              <DarkMode sx={{ fontSize: "25px" }} />
-            ) : (
-              <LightMode sx={{ color: dark, fontSize: "25px" }} />
-            )}
-          </IconButton>
-          <Message sx={{ fontSize: "25px" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
+          <Tooltip title={<Typography fontSize={12}>Switch Theme</Typography>}>
+            <IconButton onClick={() => dispatch(setMode())}>
+              {theme.palette.mode === "dark" ? (
+                <DarkMode sx={{ fontSize: "25px" }} />
+              ) : (
+                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+              )}
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={<Typography fontSize={12}>Messenger</Typography>}>
+            <Message sx={{ fontSize: "25px" }} />
+          </Tooltip>
+          <Tooltip title={<Typography fontSize={12}>Notifications</Typography>}>
+            <Notifications sx={{ fontSize: "25px" }} />
+          </Tooltip>
+          <Tooltip title={<Typography fontSize={12}>Help</Typography>}>
+            <Help sx={{ fontSize: "25px" }} />
+          </Tooltip>
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}
